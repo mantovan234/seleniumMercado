@@ -1,46 +1,47 @@
 package tests;
 
 import org.junit.Test;
+
+import utilities.ExcelClass;
+
 import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+
+
 
 public class Controlador {
 	
-
-		public  void main(String[] args) {
+	private ExcelClass claseExcel = new ExcelClass("C:\\Libro1.xlsx", "Hoja1");
 	
-			pruebaLogueo();
-			pruebaLogueoNegativa();
-			
+	//tests positivos
+	@Test
+	public void pruebaLogueo() throws IOException {
+		LoginTest logueoTest = new LoginTest();
+		logueoTest.loguearse("qactionstest","test123");
+		String validacion = logueoTest.validarLogueo();
+		claseExcel.insertarImagen("C:\\selenium\\logueoCorrecto.png", 2);
+		assertEquals("QActions",validacion );
+		if (validacion == "QActions") {
+			claseExcel.write(2, 6, "OK");	
+		}else {
+			claseExcel.write(2, 6, "NO OK");
 		}
-
-		//Tests positivos
-		@Test
-		public void pruebaLogueo() {
-			
-			LoginTest logueoTest = new LoginTest();
-			logueoTest.loguearse("qactionstest","test123");
-			assertEquals("QActions", logueoTest.validarLogueo());
-			logueoTest.cerrarSesion();
+		
+		logueoTest.cerrarSesion();
+	}
+	//tests negativos
+	@Test
+	public void pruebaLogueoNegativa() throws IOException {
+		LoginTest logueoTest = new LoginTest();
+		String resultado = logueoTest.loguearse("otrousuario","otracontraseÃ±a");
+		claseExcel.insertarImagen("C:\\selenium\\logueoIncorrecto.png", 3);
+		assertEquals("No logueado", resultado);
+		if (resultado == "No logueado") {
+			claseExcel.write(3, 6, "OK");	
+		}else {
+			claseExcel.write(3, 6, "NO OK");
 		}
-		//Tests negativos
-		@Test
-		public void pruebaLogueoNegativa() {
-			
-			LoginTest logueoTest = new LoginTest();
-			String resultado = logueoTest.loguearse("otrousuario","otracontraseña");
-			assertEquals("No logueado", resultado);
-			
-			}	
+	}
 
-
-
-	
-		
-		   
-		      
-		
 }
-
-
-
-
