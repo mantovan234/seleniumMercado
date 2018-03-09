@@ -1,5 +1,8 @@
 package tests;
 
+
+import java.io.IOException;
+
 import pages.BarraNavegacionPage;
 import pages.LoginPage;
 
@@ -11,11 +14,10 @@ public class LoginTest extends BaseTest  {
 	}
 	
 	
-	public String loguearse(String usuario, String pass) {
+	public String loguearse(String usuario, String pass) throws IOException {
 		LoginPage loginMercado = new LoginPage(driver, driverWait);
 		BarraNavegacionPage barraNavegacion = new BarraNavegacionPage(driver, driverWait);
-		barraNavegacion.ingresar(); //hacemos click en el boton ingresar para poder loguearnos
-		
+		barraNavegacion.ingresar(); //hacemos click en el boton ingresar para poder loguearnos	 
 		return loginMercado.login(usuario, pass); //nos logueamos en el sitio
 		
 	}
