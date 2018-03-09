@@ -25,7 +25,7 @@ public class BarraNavegacionPage extends AbstractPageObject {
 		
 		//encuentro el boton ingresar
 		WebElement barraElement = driver.findElement(By.xpath("//NAV[@id='nav-header-menu']"));
-		WebElement botonIngresar = barraElement.findElement(By.linkText("Ingres·"));
+		WebElement botonIngresar = barraElement.findElement(By.linkText("Ingres√°"));
 		wait.until(ExpectedConditions.visibilityOf(logoMercado));
 		botonIngresar.click();
 	}
@@ -34,7 +34,8 @@ public class BarraNavegacionPage extends AbstractPageObject {
 		//encuentro el boton salir
 		WebElement botonUser = driver.findElement(By.xpath("//LABEL[@for='nav-header-user-switch']"));
 		botonUser.click();
-		WebElement botonSalir = driver.findElement(By.linkText("Salir"));
+		WebElement botonSalir = driver.findElement(By.xpath("//*[@id=\"nav-header-menu\"]/div/nav/div[1]/div[2]/a[6]"));
+		wait.until(ExpectedConditions.visibilityOf(botonSalir));
 		botonSalir.click();
 	}
 	
